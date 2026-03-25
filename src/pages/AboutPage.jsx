@@ -1,79 +1,90 @@
 import React from 'react';
-import './AboutPage.css';
+import houseImage from '../assets/blue-craft-house.jpg';
 
 const AboutPage = () => {
     return (
-        <div className="about-page">
+        <div className="bg-light pb-5">
             {/* 1. HERO SECTION */}
-            <section className="about-hero">
-                <div className="about-hero-content">
-                    <h1>About Blue Craft Properties</h1>
-                    <p className="subtitle">Trusted real estate partners in Bengaluru</p>
+            <section className="bg-primary text-white text-center py-5 mb-5 border-bottom">
+                <div className="container py-4">
+                    <h1 className="fw-bold display-4 mb-2">About Blue Craft Properties</h1>
+                    <p className="lead opacity-75 fs-4">Trusted real estate partners in Bengaluru</p>
                 </div>
             </section>
 
-            <div className="about-container">
+            <div className="container">
                 {/* 2. WHAT SETS US APART (FEATURE CARDS) */}
-                <section className="about-features">
-                    <div className="feature-card">
-                        <h3>Seamless Experience</h3>
-                        <p>We provide a hassle-free and smooth property selling journey from start to finish.</p>
-                    </div>
-                    <div className="feature-card">
-                        <h3>Curated Listings</h3>
-                        <p>Exclusive access to hand-picked land, flats, and villas that meet high standards.</p>
-                    </div>
-                    <div className="feature-card">
-                        <h3>Quality Focus</h3>
-                        <p>We prioritize premium quality and ensure complete customer satisfaction in every deal.</p>
-                    </div>
-                    <div className="feature-card">
-                        <h3>Client-First Approach</h3>
-                        <p>Our transparent and honest process puts your needs and interests above everything else.</p>
-                    </div>
-                </section>
-
-                {/* 3. OUR MISSION (SPLIT LAYOUT) */}
-                <section className="about-mission">
-                    <div className="mission-text">
-                        <h2>Our Mission</h2>
-                        <p>
-                            At Blue Craft Properties, our mission is to provide a seamless property selling experience.
-                            We specialize in land, flats, and villas, carefully curating 3–6 unique sites.
-                            We prioritize quality, trust, and customer satisfaction.
-                        </p>
-                    </div>
-                    <div className="mission-visual">
-                        {/* Visual element or placeholder for image */}
-                        <div className="visual-placeholder"></div>
-                    </div>
-                </section>
-
-                {/* 4. EXPERIENCE & CREDIBILITY SECTION */}
-                <section className="about-credibility">
-                    <div className="credibility-content">
-                        <h2>Why Choose Us?</h2>
-                        <div className="credibility-grid">
-                            <div className="cred-item">
-                                <h3>Expertise</h3>
-                                <p>Strong experience in Bengaluru real estate market.</p>
+                <section className="mb-5">
+                    <div className="row g-4">
+                        <div className="col-md-6 col-lg-3">
+                            <div className="card h-100 border-0 shadow-sm p-4 hover-shadow" style={{ transition: 'transform 0.3s ease, box-shadow 0.3s ease' }}>
+                                <h3 className="h5 fw-bold text-primary mb-3">Seamless Experience</h3>
+                                <p className="small text-secondary mb-0 lh-base">We provide a hassle-free and smooth property selling journey from start to finish.</p>
                             </div>
-                            <div className="cred-item">
-                                <h3>Relationships</h3>
-                                <p>Building long-term client relationships based on mutual respect.</p>
+                        </div>
+                        <div className="col-md-6 col-lg-3">
+                            <div className="card h-100 border-0 shadow-sm p-4 hover-shadow" style={{ transition: 'transform 0.3s ease, box-shadow 0.3s ease' }}>
+                                <h3 className="h5 fw-bold text-primary mb-3">Curated Listings</h3>
+                                <p className="small text-secondary mb-0 lh-base">Exclusive access to hand-picked land, flats, and villas that meet high standards.</p>
                             </div>
-                            <div className="cred-item">
-                                <h3>Integrity</h3>
-                                <p>Trust, transparency, and integrity are our core values.</p>
+                        </div>
+                        <div className="col-md-6 col-lg-3">
+                            <div className="card h-100 border-0 shadow-sm p-4 hover-shadow" style={{ transition: 'transform 0.3s ease, box-shadow 0.3s ease' }}>
+                                <h3 className="h5 fw-bold text-primary mb-3">Quality Focus</h3>
+                                <p className="small text-secondary mb-0 lh-base">We prioritize premium quality and ensure complete customer satisfaction in every deal.</p>
+                            </div>
+                        </div>
+                        <div className="col-md-6 col-lg-3">
+                            <div className="card h-100 border-0 shadow-sm p-4 hover-shadow" style={{ transition: 'transform 0.3s ease, box-shadow 0.3s ease' }}>
+                                <h3 className="h5 fw-bold text-primary mb-3">Client-First Approach</h3>
+                                <p className="small text-secondary mb-0 lh-base">Our transparent and honest process puts your needs and interests above everything else.</p>
                             </div>
                         </div>
                     </div>
                 </section>
 
+                {/* 3. OUR MISSION (SPLIT LAYOUT) */}
+                <section className="mb-5 py-5">
+                    <div className="row align-items-center g-5">
+                        <div className="col-lg-6 order-lg-1 order-2">
+                            <h2 className="fw-bold display-6 mb-4 text-dark">Our Mission</h2>
+                            <p className="lead text-secondary lh-lg">
+                                At Blue Craft Properties, our mission is to provide a seamless property selling experience.
+                                We specialize in land, flats, and villas, carefully curating 3–6 unique sites.
+                                We prioritize quality, trust, and customer satisfaction.
+                            </p>
+                        </div>
+                        <div className="col-lg-6 order-lg-2 order-1">
+                            <div className="rounded-3 overflow-hidden shadow-lg position-relative bg-white" style={{ height: '400px' }}>
+                                <img src={houseImage} alt="Blue Craft Properties House" className="w-100 h-100 object-fit-contain" />
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* 4. EXPERIENCE & CREDIBILITY SECTION */}
+                <section className="bg-white p-5 rounded-3 shadow-sm mb-5 text-center border">
+                    <h2 className="fw-bold mb-5 display-6 text-dark">Why Choose Us?</h2>
+                    <div className="row g-5">
+                        <div className="col-md-4">
+                            <h3 className="h4 fw-bold text-primary mb-3">Expertise</h3>
+                            <p className="text-secondary lead fs-6">Strong experience in Bengaluru real estate market.</p>
+                        </div>
+                        <div className="col-md-4">
+                            <h3 className="h4 fw-bold text-primary mb-3">Relationships</h3>
+                            <p className="text-secondary lead fs-6">Building long-term client relationships based on mutual respect.</p>
+                        </div>
+                        <div className="col-md-4">
+                            <h3 className="h4 fw-bold text-primary mb-3">Integrity</h3>
+                            <p className="text-secondary lead fs-6">Trust, transparency, and integrity are our core values.</p>
+                        </div>
+                    </div>
+                </section>
+
                 {/* 5. OUR VISION */}
-                <section className="about-vision">
-                    <h2>Our Vision</h2>
-                    <p>
+                <section className="text-center mx-auto mb-5 py-4" style={{ maxWidth: '800px' }}>
+                    <h2 className="fw-bold mb-4 display-6 text-dark">Our Vision</h2>
+                    <p className="lead text-secondary lh-lg fs-4">
                         Our vision at Blue Craft Properties is to become a leading property selling platform,
                         known for transparency, reliability, and a client-centric approach.
                         We aim to redefine real estate standards and set new benchmarks of excellence.
@@ -81,9 +92,9 @@ const AboutPage = () => {
                 </section>
 
                 {/* 6. SOFT CALL TO ACTION */}
-                <section className="about-cta">
-                    <p>Ready to find your dream property?</p>
-                    <a href="/contact" className="cta-button">Contact Us</a>
+                <section className="bg-primary text-white text-center p-5 rounded-3 shadow mb-5 d-flex flex-column align-items-center gap-4">
+                    <p className="h2 fw-medium mb-0">Ready to find your dream property?</p>
+                    <a href="/contact" className="btn btn-light rounded-pill px-5 py-3 fw-bold text-primary shadow-sm hover-lift" style={{ transition: 'transform 0.2s' }}>Contact Us</a>
                 </section>
             </div>
         </div>

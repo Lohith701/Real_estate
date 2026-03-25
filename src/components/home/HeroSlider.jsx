@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './HeroSlider.css';
 
 // Import images
@@ -35,63 +35,115 @@ const slides = [
 ];
 
 const HeroSlider = () => {
-    const [currentSlide, setCurrentSlide] = useState(0);
+    // Debug logging
+    React.useEffect(() => {
+        console.log('HeroSlider mounted with slides:', slides);
 
-    useEffect(() => {
-        const slideInterval = setInterval(() => {
-            setCurrentSlide((prev) => (prev + 1) % slides.length);
-        }, 5000); // Change slide every 5 seconds
-
-        return () => clearInterval(slideInterval);
+        // Manual initialization ensuring Bootstrap carousel works
+        const carouselElement = document.getElementById('heroCarousel');
+        if (carouselElement && window.bootstrap) {
+            console.log('Initializing Bootstrap Carousel manually');
+            const carousel = new window.bootstrap.Carousel(carouselElement, {
+                interval: 5000,
+                ride: 'carousel'
+            });
+            return () => {
+                carousel.dispose();
+            };
+        } else if (!window.bootstrap) {
+            console.warn('Bootstrap not found on window object. Ensure bootstrap.bundle.min.js is imported.');
+        }
     }, []);
 
-    const nextSlide = () => {
-        setCurrentSlide((prev) => (prev + 1) % slides.length);
-    };
-
-    const prevSlide = () => {
-        setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-    };
-
-    const goToSlide = (index) => {
-        setCurrentSlide(index);
-    };
-
     return (
-        <div className="hero-slider">
-            {slides.map((slide, index) => (
-                <div
-                    key={slide.id}
-                    className={`slide ${index === currentSlide ? 'active' : ''}`}
-                    style={{ backgroundImage: `url(${slide.image})` }}
-                >
-                    <div className="slide-overlay">
-                        <div className="slide-content">
-                            <h1>{slide.title}</h1>
-                            <p>{slide.subtitle}</p>
-                        </div>
-                    </div>
-                </div>
-            ))}
-
-            {/* Navigation Arrows */}
-            <button className="slider-arrow left" onClick={prevSlide}>
-                &#10094;
-            </button>
-            <button className="slider-arrow right" onClick={nextSlide}>
-                &#10095;
-            </button>
-
-            {/* Dots Navigation */}
-            <div className="slider-dots">
+        <div id="heroCarousel" className="carousel slide" data-bs-ride="carousel">
+            <div className="carousel-indicators">
                 {slides.map((_, index) => (
-                    <span
+                    <button
                         key={index}
-                        className={`dot ${index === currentSlide ? 'active' : ''}`}
-                        onClick={() => goToSlide(index)}
-                    ></span>
+                        type="button"
+                        data-bs-target="#heroCarousel"
+                        data-bs-slide-to={index}
+                        className={index === 0 ? "active" : ""}
+                        aria-current={index === 0 ? "true" : "false"}
+                        aria-label={`Slide ${index + 1}`}
+                    ></button>
                 ))}
             </div>
+
+            <div className="carousel-inner h-100">
+                {slides.map((slide, index) => (
+                    <div
+                        key={slide.id}
+                        className={`carousel-item ${index === 0 ? 'active' : ''}`}
+                        data-bs-interval="5000"
+                        style={{ height: '70vh', minHeight: '400px' }}
+                    >
+                        <div
+                            className="d-block w-100 h-100"
+                            style={{
+                                backgroundImage: `url("${slide.image}")`,
+                                backgroundSize: 'cover',
+                                backgroundPosition: 'center',
+                                backgroundRepeat: 'no-repeat',
+                                position: 'relative'
+                            }}
+                        >
+                            {/* Gradient Overlay */}
+                            <div
+                                style={{
+                                    position: 'absolute',
+                                    top: 0,
+                                    left: 0,
+                                    right: 0,
+                                    bottom: 0,
+                                    background: 'linear-gradient(to right, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0) 100%)',
+                                    zIndex: 1
+                                }}
+                            ></div>
+
+                            {/* Content Container */}
+                            <div
+                                className="carousel-caption d-flex flex-column justify-content-center align-items-start h-100 w-100 text-start"
+                                style={{
+                                    top: 0,
+                                    bottom: 0,
+                                    zIndex: 2,
+                                    paddingLeft: '5%',
+                                    paddingRight: '5%',
+                                    pointerEvents: 'none' // Allow clicks to pass through empty areas
+                                }}
+                            >
+                                <div className="container" style={{ pointerEvents: 'auto' }}> {/* Re-enable clicks for text text selection */}
+                                    <h1 className="display-3 fw-bold mb-3" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>{slide.title}</h1>
+                                    <p className="lead fs-2 fw-light" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.5)', maxWidth: '600px' }}>{slide.subtitle}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            <button
+                className="carousel-control-prev"
+                type="button"
+                data-bs-target="#heroCarousel"
+                data-bs-slide="prev"
+                style={{ zIndex: 10 }} // Ensure controls are on top
+            >
+                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span className="visually-hidden">Previous</span>
+            </button>
+            <button
+                className="carousel-control-next"
+                type="button"
+                data-bs-target="#heroCarousel"
+                data-bs-slide="next"
+                style={{ zIndex: 10 }} // Ensure controls are on top
+            >
+                <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                <span className="visually-hidden">Next</span>
+            </button>
         </div>
     );
 };

@@ -3,42 +3,52 @@ import { Link } from 'react-router-dom';
 import logo from '../../assets/logo.jpg';
 
 const Navbar = () => {
-    const [click, setClick] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
 
-    const handleClick = () => setClick(!click);
-    const closeMobileMenu = () => setClick(false);
+    const toggle = () => setIsOpen(!isOpen);
+    const closeMenu = () => setIsOpen(false);
 
     return (
-        <nav className="navbar">
-            <div className="navbar-container">
-                <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
-                    <img src={logo} alt="Blue Craft Properties" className="nav-logo-img" />
-                    <div className="nav-logo-text">
-                        <span>Blue</span>
-                        <span>Craft</span>
-                        <span>Properties</span>
+        <nav className="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm py-2">
+            <div className="container-fluid px-4">
+                <Link to="/" className="navbar-brand d-flex align-items-center" onClick={closeMenu}>
+                    {/* Ensure logo height scales gracefully on smaller screens */}
+                    <img src={logo} alt="Blue Craft Properties" className="me-2" style={{ height: 'clamp(35px, 6vw, 50px)', width: 'auto' }} />
+                    <div className="d-flex align-items-center flex-wrap" style={{ fontFamily: "'Nunito', sans-serif", whiteSpace: 'nowrap' }}>
+                        {/* Responsive typography to prevent overflowing container on mobile View */}
+                        <span className="fw-black text-dark fs-5 fs-sm-4 mb-0" style={{ fontWeight: 900, transform: 'scaleY(0.9)' }}>BlueCraft</span>
+                        <span className="fw-bold ms-1 fs-5 fs-sm-4 mb-0" style={{ color: '#0056b3', transform: 'scaleY(0.9)' }}>Properties</span>
                     </div>
                 </Link>
-                <div className="menu-icon" onClick={handleClick}>
-                    <i className={click ? 'fas fa-times' : 'fas fa-bars'}>
-                        {click ? '✕' : '☰'}
-                    </i>
-                </div>
-                <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-                    <li className="nav-item">
-                        <Link to="/" className="nav-links" onClick={closeMobileMenu}>Home</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to="/properties" className="nav-links" onClick={closeMobileMenu}>Properties</Link>
-                    </li>
 
-                    <li className="nav-item">
-                        <Link to="/about" className="nav-links" onClick={closeMobileMenu}>About Us</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to="/contact" className="nav-links" onClick={closeMobileMenu}>Contact</Link>
-                    </li>
-                </ul>
+                {/* Navbar Toggler cleanly aligned to right */}
+                <button
+                    className="navbar-toggler border-0 shadow-none px-2"
+                    type="button"
+                    onClick={toggle}
+                    aria-controls="navbarNav"
+                    aria-expanded={isOpen}
+                    aria-label="Toggle navigation"
+                >
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+
+                <div className={`collapse navbar-collapse ${isOpen ? 'show' : ''}`} id="navbarNav">
+                    <ul className="navbar-nav ms-auto mb-2 mb-lg-0 gap-lg-3 text-center mt-3 mt-lg-0">
+                        <li className="nav-item">
+                            <Link to="/" className="nav-link text-secondary fw-bold px-3 py-2" onClick={closeMenu}>Home</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/properties" className="nav-link text-secondary fw-bold px-3 py-2" onClick={closeMenu}>Properties</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/about" className="nav-link text-secondary fw-bold px-3 py-2" onClick={closeMenu}>About Us</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/contact" className="nav-link text-secondary fw-bold px-3 py-2" onClick={closeMenu}>Contact</Link>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
     );
