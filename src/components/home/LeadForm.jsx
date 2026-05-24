@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const LeadForm = () => {
+const LeadForm = ({ onSuccessSubmit }) => {
     const [formData, setFormData] = useState({
         name: '',
         phone: '',
@@ -46,8 +46,29 @@ const LeadForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (validate()) {
-            console.log('Lead Form Submitted:', formData);
-            alert('Thank you! We will contact you soon.');
+            const submitData = {
+                ...formData,
+                _cc: "Projects@bluecraftdesignstudio.com",
+                _subject: "New Lead from Website Form"
+            };
+
+            // Fire request in background
+            fetch('https://formsubmit.co/ajax/Sales@bluecraftdesignstudio.com', {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(submitData)
+            }).catch(error => console.error("Error submitting lead form:", error));
+
+            // Execute success logic immediately to avoid any delay
+            if (onSuccessSubmit) {
+                onSuccessSubmit();
+            } else {
+                alert('Thank you! We will contact you soon.');
+            }
+
             setFormData({
                 name: '',
                 phone: '',

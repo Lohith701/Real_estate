@@ -70,7 +70,7 @@ const PropertyCard = ({ property }) => {
                                 <button className="btn btn-outline-secondary btn-sm px-3 shadow-sm">
                                     <i className="fas fa-share-alt"></i>
                                 </button>
-                                <Link to={`/properties/${property.id}`} className="btn btn-success fw-bold px-4 shadow-sm" style={{ backgroundColor: '#009587', borderColor: '#009587', textDecoration: 'none' }}>
+                                <Link to={`/properties/${property._id || property.id}`} className="btn btn-success fw-bold px-4 shadow-sm" style={{ backgroundColor: '#009587', borderColor: '#009587', textDecoration: 'none' }}>
                                     Check Property
                                 </Link>
                             </div>

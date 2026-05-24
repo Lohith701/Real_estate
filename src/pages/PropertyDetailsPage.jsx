@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import LeadForm from '../components/home/LeadForm';
 
@@ -7,78 +7,38 @@ import rentImg from '../resources/home-slider/rent.png';
 import buyImg from '../resources/home-slider/buy.png';
 import sellImg from '../resources/home-slider/sell.png';
 
-// Mock Data (should match PropertiesPage for consistency in valid IDs)
-const PROPERTIES_DATA = [
-    {
-        id: 1,
-        title: 'Luxury Apartment',
-        location: 'Downtown, City',
-        price: '$2,500/mo',
-        type: 'Rent',
-        image: rentImg,
-        description: 'Experience the height of luxury in this stunning downtown apartment. Featuring floor-to-ceiling windows, modern appliances, and a breathtaking view of the city skyline.',
-        amenities: ['2 Bedrooms', '2 Bathrooms', 'Gym Access', 'Rooftop Pool', '24/7 Security'],
-    },
-    {
-        id: 2,
-        title: 'Modern Villa',
-        location: 'Suburbs, City',
-        price: '$850,000',
-        type: 'Buy',
-        image: buyImg,
-        description: 'A spacious modern villa located in the quiet suburbs. Perfect for families, with a large backyard, open-concept living area, and state-of-the-art kitchen.',
-        amenities: ['4 Bedrooms', '3 Bathrooms', 'Private Garden', 'Garage', 'Smart Home System'],
-    },
-    {
-        id: 3,
-        title: 'Cozy Studio',
-        location: 'Uptown, City',
-        price: '$1,200/mo',
-        type: 'Rent',
-        image: sellImg,
-        description: 'A charming studio apartment in the heart of Uptown. Close to cafes, parks, and public transport. ideal for young professionals.',
-        amenities: ['Studio', '1 Bathroom', 'Furnished', 'High-Speed Internet', 'Pet Friendly'],
-    },
-    {
-        id: 4,
-        title: 'Family Home',
-        location: 'Green Valley, City',
-        price: '$450,000',
-        type: 'Buy',
-        image: rentImg,
-        description: 'Beautiful family home in Green Valley. Safe neighborhood with excellent schools nearby. Features a renovated kitchen and hardwood floors.',
-        amenities: ['3 Bedrooms', '2 Bathrooms', 'Backyard', 'Fireplace', 'Near Schools'],
-    },
-    {
-        id: 5,
-        title: 'Penthouse Suite',
-        location: 'City Center',
-        price: '$5,000/mo',
-        type: 'Rent',
-        image: buyImg,
-        description: 'Exclusive penthouse suite with private elevator access. Panoramic views, wrap-around terrace, and premium finishes throughout.',
-        amenities: ['3 Bedrooms', '3.5 Bathrooms', 'Private Terrace', 'Concierge', 'Valet Parking'],
-    },
-    {
-        id: 6,
-        title: 'Beachfront Condo',
-        location: 'Seaside, City',
-        price: '$600,000',
-        type: 'Buy',
-        image: sellImg,
-        description: 'Wake up to the sound of waves in this beachfront condo. Direct beach access, resort-style amenities, and a vibrant local community.',
-        amenities: ['2 Bedrooms', '2 Bathrooms', 'Ocean View', 'Pool', 'Fitness Center'],
-    },
-];
+// Removed PROPERTIES_DATA
 
 const PropertyDetailsPage = () => {
     const { id } = useParams();
-    const property = PROPERTIES_DATA.find((p) => p.id === parseInt(id));
+    const [property, setProperty] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-    // Scroll to top on mount
     useEffect(() => {
         window.scrollTo(0, 0);
+        const fetchProperty = async () => {
+            try {
+                const res = await fetch(`http://localhost:5000/api/properties/${id}`);
+                const result = await res.json();
+                if (result.success) {
+                    setProperty(result.data);
+                }
+            } catch (error) {
+                console.error("Error fetching property details", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchProperty();
     }, [id]);
+
+    if (loading) {
+        return (
+            <div className="container py-5 text-center">
+                <h2>Loading Property...</h2>
+            </div>
+        );
+    }
 
     if (!property) {
         return (
@@ -134,7 +94,7 @@ const PropertyDetailsPage = () => {
                         <div className="mb-5">
                             <h4 className="fw-bold mb-4 text-dark">Amenities</h4>
                             <div className="row g-3">
-                                {property.amenities.map((amenity, index) => (
+                                {property.amenities && property.amenities.map((amenity, index) => (
                                     <div key={index} className="col-md-6 col-lg-4">
                                         <div className="d-flex align-items-center">
                                             <i className="fas fa-check-circle text-primary me-2"></i>

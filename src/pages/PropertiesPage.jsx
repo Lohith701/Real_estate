@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import PropertyCard from '../components/properties/PropertyCard';
 
@@ -7,78 +7,7 @@ import rentImg from '../resources/home-slider/rent.png';
 import buyImg from '../resources/home-slider/buy.png';
 import sellImg from '../resources/home-slider/sell.png';
 
-const PROPERTIES_DATA = [
-    {
-        id: 1,
-        title: 'Sowparnika Ashiyana',
-        location: 'Whitefield, Bangalore',
-        price: '₹50.96 L - ₹97.06 L',
-        priceVal: 5000000,
-        type: 'Apartment',
-        bhk: '2, 3 BHK Flats',
-        area: '1050 sq.ft',
-        status: 'Ready',
-        builder: 'Sowparnika Group',
-        builderLogo: 'https://via.placeholder.com/30?text=SG',
-        image: rentImg,
-    },
-    {
-        id: 2,
-        title: 'Prestige Primrose Hills',
-        location: 'Kanakapura Road, Bangalore',
-        price: '₹53.76 L - ₹1.26 Crs',
-        priceVal: 6000000,
-        type: 'Apartment',
-        bhk: '1, 2, 3 BHK Flats',
-        area: '584 sq.ft onwards',
-        status: 'Under Construction',
-        builder: 'Prestige Group',
-        builderLogo: 'https://via.placeholder.com/30?text=PG',
-        image: buyImg,
-    },
-    {
-        id: 3,
-        title: 'Bren Northern Lights',
-        location: 'Jakkur, Bangalore',
-        price: '₹58 L - ₹97 L',
-        priceVal: 5800000,
-        type: 'Apartment',
-        bhk: '1, 2 Flats',
-        area: '700 sq.ft',
-        status: 'Ready',
-        builder: 'Bren Corporation',
-        builderLogo: 'https://via.placeholder.com/30?text=BC',
-        image: sellImg,
-    },
-    {
-        id: 4,
-        title: 'Godrej Air',
-        location: 'Whitefield, Bangalore',
-        price: '₹1.1 Cr - ₹1.8 Cr',
-        priceVal: 11000000,
-        type: 'Villa',
-        bhk: '3, 4 BHK',
-        area: '1800 sq.ft',
-        status: 'Ready',
-        builder: 'Godrej Properties',
-        builderLogo: 'https://via.placeholder.com/30?text=GP',
-        image: rentImg,
-    },
-    {
-        id: 5,
-        title: 'Brigade Utopia',
-        location: 'Varthur, Bangalore',
-        price: '₹80 L - ₹1.5 Cr',
-        priceVal: 8000000,
-        type: 'Apartment',
-        bhk: '2, 3 BHK',
-        area: '1200 sq.ft',
-        status: 'Under Construction',
-        builder: 'Brigade Group',
-        builderLogo: 'https://via.placeholder.com/30?text=BG',
-        image: buyImg,
-    },
-];
+// Removed PROPERTIES_DATA
 
 const PropertiesPage = () => {
     const [searchParams] = useSearchParams();
@@ -90,6 +19,29 @@ const PropertiesPage = () => {
     const [filterBHK, setFilterBHK] = useState('All');
     const [priceRange, setPriceRange] = useState(100); // 0 to 100 scale, representing 0 to 10Cr+
     const [filterStatus, setFilterStatus] = useState('All');
+
+    // Data State
+    const [fetchedProperties, setFetchedProperties] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    // Fetch from Backend
+    useEffect(() => {
+        const fetchProperties = async () => {
+            try {
+                const response = await fetch('http://localhost:5000/api/properties');
+                const result = await response.json();
+                if (result.success) {
+                    setFetchedProperties(result.data);
+                }
+            } catch (error) {
+                console.error("Error fetching properties:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchProperties();
+    }, []);
 
     // Sync from URL params on change
     const [prevSearchParams, setPrevSearchParams] = useState(searchParams);
@@ -103,17 +55,11 @@ const PropertiesPage = () => {
 
     // Apply Filters (Derived State)
     const items = useMemo(() => {
-        let filtered = PROPERTIES_DATA;
+        let filtered = fetchedProperties;
 
         // 1. Type Filter
         if (filterType !== 'All') {
-            filtered = filtered.filter(item => {
-                if (filterType === 'Apartment') return item.type === 'Apartment';
-                if (filterType === 'Villa') return item.type === 'Villa';
-                if (filterType === 'Independent Floor') return item.type === 'Independent Floor';
-                if (filterType === 'Independent House') return item.type === 'Independent House';
-                return item.type === filterType;
-            });
+            filtered = filtered.filter(item => item.type === filterType);
         }
 
         // 2. Location Filter
@@ -141,7 +87,7 @@ const PropertiesPage = () => {
         // Map 0-100 slider to 0 - 10 Cr (100 * 10L = 10 Cr)
         const maxPriceVal = priceRange * 1000000;
         if (priceRange < 100) {
-            filtered = filtered.filter(item => item.priceVal <= maxPriceVal);
+            filtered = filtered.filter(item => (item.price || item.priceVal) <= maxPriceVal);
         }
 
         // 6. Status Filter
@@ -178,7 +124,7 @@ const PropertiesPage = () => {
     return (
         <div className="properties-page-container">
             {/* Header Search Section */}
-            <div className="properties-search-header py-3 shadow-sm sticky-top bg-white border-bottom" style={{ zIndex: 1020 }}>
+            <div className="properties-search-header py-3 shadow-sm sticky-top bg-white border-bottom" style={{ zIndex: 1020, top: '72px' }}>
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-md-10 col-lg-8">
@@ -214,7 +160,7 @@ const PropertiesPage = () => {
                 <div className="row g-4">
                     {/* Sidebar Filters */}
                     <div className="col-lg-3 d-none d-lg-block">
-                        <div className="filter-sidebar card shadow-sm border-0 sticky-top" style={{ top: '100px', zIndex: 1 }}>
+                        <div className="filter-sidebar card shadow-sm border-0 sticky-top" style={{ top: '160px', zIndex: 1 }}>
                             <div className="card-header bg-white border-bottom-0 pt-3 pb-2">
                                 <div className="d-flex justify-content-between align-items-center">
                                     <h5 className="fw-bold mb-0 text-secondary">Filter your Search</h5>
@@ -243,21 +189,14 @@ const PropertiesPage = () => {
                                             checked={filterType === 'Villa'}
                                             onChange={() => onTypeChange('Villa')}
                                         />
-                                        <label className="form-check-label text-muted" htmlFor="typeVilla">Gated Community Villa</label>
+                                        <label className="form-check-label text-muted" htmlFor="typeVilla">Villa</label>
                                     </div>
                                     <div className="form-check mb-2">
-                                        <input className="form-check-input" type="checkbox" id="typeFloor"
-                                            checked={filterType === 'Independent Floor'}
-                                            onChange={() => onTypeChange('Independent Floor')}
+                                        <input className="form-check-input" type="checkbox" id="typePlot"
+                                            checked={filterType === 'Plots'}
+                                            onChange={() => onTypeChange('Plots')}
                                         />
-                                        <label className="form-check-label text-muted" htmlFor="typeFloor">Independent Floor</label>
-                                    </div>
-                                    <div className="form-check mb-2">
-                                        <input className="form-check-input" type="checkbox" id="typeHouse"
-                                            checked={filterType === 'Independent House'}
-                                            onChange={() => onTypeChange('Independent House')}
-                                        />
-                                        <label className="form-check-label text-muted" htmlFor="typeHouse">Independent House</label>
+                                        <label className="form-check-label text-muted" htmlFor="typePlot">Plots</label>
                                     </div>
                                 </div>
 
@@ -265,7 +204,7 @@ const PropertiesPage = () => {
                                 <div className="mb-4">
                                     <label className="fw-bold text-secondary mb-2 small text-uppercase">Apartment Type</label>
                                     <div className="d-flex flex-wrap gap-2">
-                                        {['1 BHK', '2 BHK', '3 BHK', '4 BHK'].map(bhk => (
+                                        {['2 BHK', '3 BHK'].map(bhk => (
                                             <button
                                                 key={bhk}
                                                 className={`btn btn-sm ${filterBHK === bhk ? 'btn-primary' : 'btn-outline-light text-dark border'}`}
@@ -350,7 +289,7 @@ const PropertiesPage = () => {
                         <div className="properties-list d-flex flex-column gap-4">
                             {items.length > 0 ? (
                                 items.map((property) => (
-                                    <PropertyCard key={property.id} property={property} />
+                                    <PropertyCard key={property._id || property.id} property={property} />
                                 ))
                             ) : (
                                 <div className="text-center py-5">

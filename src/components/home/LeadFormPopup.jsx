@@ -4,17 +4,25 @@ import './LeadForm.css';
 
 const LeadFormPopup = () => {
     const [isVisible, setIsVisible] = useState(false);
+    const [hasSubmitted, setHasSubmitted] = useState(false);
 
     useEffect(() => {
-        // Show popup after 30 seconds
+        if (hasSubmitted || isVisible) return;
+
+        // Show popup 20 seconds after it was last closed (or on initial load)
         const timer = setTimeout(() => {
             setIsVisible(true);
-        }, 30000);
+        }, 20000);
 
         return () => clearTimeout(timer);
-    }, []);
+    }, [isVisible, hasSubmitted]);
 
     const closePopup = () => {
+        setIsVisible(false);
+    };
+
+    const handleSuccessSubmit = () => {
+        setHasSubmitted(true);
         setIsVisible(false);
     };
 
@@ -34,7 +42,7 @@ const LeadFormPopup = () => {
                     <h3 className="fw-bold text-primary">Get in Touch</h3>
                     <p className="text-muted small">Fill out the form below and we'll get back to you shortly.</p>
                 </div>
-                <LeadForm />
+                <LeadForm onSuccessSubmit={handleSuccessSubmit} />
             </div>
         </div>
     );

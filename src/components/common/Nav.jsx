@@ -9,7 +9,7 @@ const Navbar = () => {
     const closeMenu = () => setIsOpen(false);
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm py-2">
+        <nav className="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm py-2" style={{ zIndex: 1050 }}>
             <div className="container-fluid px-4">
                 <Link to="/" className="navbar-brand d-flex align-items-center" onClick={closeMenu}>
                     {/* Ensure logo height scales gracefully on smaller screens */}
@@ -23,14 +23,18 @@ const Navbar = () => {
 
                 {/* Navbar Toggler cleanly aligned to right */}
                 <button
-                    className="navbar-toggler border-0 shadow-none px-2"
+                    className="navbar-toggler border-0 shadow-none px-2 d-lg-none"
                     type="button"
                     onClick={toggle}
                     aria-controls="navbarNav"
                     aria-expanded={isOpen}
                     aria-label="Toggle navigation"
                 >
-                    <span className="navbar-toggler-icon"></span>
+                    {isOpen ? (
+                        <i className="bi bi-x-lg fs-2 text-primary" style={{ transition: 'all 0.3s ease' }}></i>
+                    ) : (
+                        <i className="bi bi-list fs-1 text-dark" style={{ transition: 'all 0.3s ease' }}></i>
+                    )}
                 </button>
 
                 <div className={`collapse navbar-collapse ${isOpen ? 'show' : ''}`} id="navbarNav">
