@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import LeadForm from '../components/home/LeadForm';
+import HeroBanner from '../components/common/HeroBanner';
+import contactBannerImg from '../resources/hero_banner/empty-chairs-tables-restaurant.jpg.jpeg';
 
 const ContactPage = () => {
     // Scroll to top
@@ -11,16 +13,16 @@ const ContactPage = () => {
 
     return (
         <div className="bg-light pb-5">
-            {/* 1. Hero Section */}
-            <div className="bg-primary text-white py-5 mb-5 text-center">
-                <div className="container py-4">
-                    <h1 className="fw-bold display-4 mb-3">Contact Blue Craft Properties</h1>
-                    <p className="lead opacity-75 fw-light">We’re here to help you find the right property</p>
-                </div>
-            </div>
+            {/* 1. Hero Banner */}
+            <HeroBanner
+                backgroundImage={contactBannerImg}
+                eyebrow="Get In Touch"
+                title="Contact Us"
+                subtitle="We're here to help you find the right property"
+            />
 
             {/* 2. Main Section */}
-            <div className="container mb-5">
+            <div className="container mb-5 mt-5">
                 <div className="row g-5">
                     {/* Left Column: Contact Info */}
                     <div className="col-lg-5">

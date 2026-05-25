@@ -1,0 +1,178 @@
+/* ================================================
+   HERO BANNER — Cinematic page header component
+   ================================================ */
+
+/* ---------- Container ---------- */
+.hero-banner {
+  position: relative;
+  width: 100%;
+  height: 320px;
+  overflow: hidden;
+}
+
+/* ---------- 1. Background Image ---------- */
+.hero-banner__bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  animation: heroBgZoom 16s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes heroBgZoom {
+  0%   { transform: scale(1.0); }
+  100% { transform: scale(1.08); }
+}
+
+/* ---------- 2. Dark Overlay ---------- */
+.hero-banner__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 9, 14, 0.60);
+}
+
+/* ---------- 3. Vignette ---------- */
+.hero-banner__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(6, 9, 14, 0.72) 100%);
+}
+
+/* ---------- 4. Curtain Shimmer ---------- */
+.hero-banner__shimmer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero-banner__shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -140px;
+  width: 120px;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.09) 50%,
+    transparent 100%
+  );
+  animation: curtainSweep 5s ease-in-out infinite;
+}
+
+@keyframes curtainSweep {
+  0%   { left: -140px; }
+  100% { left: 110%; }
+}
+
+/* ---------- 5. Centered Content ---------- */
+.hero-banner__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  padding: 0 1.5rem;
+}
+
+/* Eyebrow Label */
+.hero-banner__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-transform: uppercase;
+  color: #c9a96e;
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 7px;
+  margin-bottom: 14px;
+}
+
+.hero-banner__eyebrow::before,
+.hero-banner__eyebrow::after {
+  content: '';
+  display: block;
+  width: 36px;
+  height: 1px;
+  background: #c9a96e;
+  opacity: 0.6;
+}
+
+/* Title */
+.hero-banner__title {
+  font-family: inherit;
+  font-size: 58px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 10px;
+  line-height: 1.1;
+}
+
+/* Subtitle */
+.hero-banner__subtitle {
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: rgba(245, 240, 235, 0.55);
+  letter-spacing: 2px;
+  margin-bottom: 18px;
+  font-weight: 400;
+}
+
+/* Gold bar */
+.hero-banner__goldbar {
+  width: 40px;
+  height: 2px;
+  background: #c9a96e;
+  border: none;
+  margin: 0 auto;
+}
+
+/* ---------- 6. Bottom Shimmer Line ---------- */
+.hero-banner__bottomline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(201, 169, 110, 0.55) 50%,
+    transparent 100%
+  );
+  z-index: 3;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .hero-banner {
+    height: 260px;
+  }
+
+  .hero-banner__title {
+    font-size: 34px;
+  }
+
+  .hero-banner__eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 4px;
+    gap: 10px;
+  }
+
+  .hero-banner__eyebrow::before,
+  .hero-banner__eyebrow::after {
+    width: 24px;
+  }
+
+  .hero-banner__subtitle {
+    font-size: 0.82rem;
+    letter-spacing: 1.5px;
+  }
+}

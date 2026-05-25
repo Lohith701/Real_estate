@@ -1,18 +1,20 @@
 import React from 'react';
 import houseImage from '../assets/blue-craft-house.jpg';
+import HeroBanner from '../components/common/HeroBanner';
+import aboutBannerImg from '../resources/hero_banner/interior-modern-open-plan-kitchen-with-dining-table-glowi.jpg.jpeg';
 
 const AboutPage = () => {
     return (
         <div className="bg-light pb-5">
-            {/* 1. HERO SECTION */}
-            <section className="bg-primary text-white text-center py-5 mb-5 border-bottom">
-                <div className="container py-4">
-                    <h1 className="fw-bold display-4 mb-2">About Blue Craft Properties</h1>
-                    <p className="lead opacity-75 fs-4">Trusted real estate partners in Bengaluru</p>
-                </div>
-            </section>
+            {/* 1. HERO BANNER */}
+            <HeroBanner
+                backgroundImage={aboutBannerImg}
+                eyebrow="Our Story"
+                title="About Us"
+                subtitle="Trusted real estate partners in Bengaluru"
+            />
 
-            <div className="container">
+            <div className="container mt-5">
                 {/* 2. WHAT SETS US APART (FEATURE CARDS) */}
                 <section className="mb-5">
                     <div className="row g-4">

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import './HeroSlider.css';
 
 // Import images
@@ -13,138 +14,122 @@ const slides = [
         image: rentImg,
         title: 'Buy a Flat',
         subtitle: 'Find your perfect flat today.',
+        cta: 'Explore Flats',
     },
     {
         id: 2,
         image: buyImg,
         title: 'Buy a Villa',
         subtitle: 'Invest in your dream home with confidence.',
+        cta: 'View Villas',
     },
     {
         id: 3,
         image: sellImg,
-        title: 'Buy a Commercial property',
-        subtitle: 'Get the best valued Commercial property.',
+        title: 'Commercial Property',
+        subtitle: 'Get the best valued commercial property.',
+        cta: 'Browse Commercial',
     },
     {
         id: 4,
         image: bluecartImg,
         title: 'One-stop Destination',
-        subtitle: 'BlueCart - All your real estate needs sorted.',
+        subtitle: 'BlueCraft — All your real estate needs sorted.',
+        cta: 'Get Started',
     },
 ];
 
-const HeroSlider = () => {
-    // Debug logging
-    React.useEffect(() => {
-        console.log('HeroSlider mounted with slides:', slides);
+const AUTOPLAY_INTERVAL = 5000;
 
-        // Manual initialization ensuring Bootstrap carousel works
-        const carouselElement = document.getElementById('heroCarousel');
-        if (carouselElement && window.bootstrap) {
-            console.log('Initializing Bootstrap Carousel manually');
-            const carousel = new window.bootstrap.Carousel(carouselElement, {
-                interval: 5000,
-                ride: 'carousel'
-            });
-            return () => {
-                carousel.dispose();
-            };
-        } else if (!window.bootstrap) {
-            console.warn('Bootstrap not found on window object. Ensure bootstrap.bundle.min.js is imported.');
-        }
-    }, []);
+const HeroSlider = () => {
+    const [current, setCurrent] = useState(0);
+    const [isTransitioning, setIsTransitioning] = useState(false);
+
+    const goTo = useCallback((index) => {
+        if (isTransitioning || index === current) return;
+        setIsTransitioning(true);
+        setCurrent(index);
+        setTimeout(() => setIsTransitioning(false), 800);
+    }, [current, isTransitioning]);
+
+    const goNext = useCallback(() => {
+        goTo((current + 1) % slides.length);
+    }, [current, goTo]);
+
+    const goPrev = useCallback(() => {
+        goTo((current - 1 + slides.length) % slides.length);
+    }, [current, goTo]);
+
+    // Auto-slide
+    useEffect(() => {
+        const timer = setInterval(goNext, AUTOPLAY_INTERVAL);
+        return () => clearInterval(timer);
+    }, [goNext]);
 
     return (
-        <div id="heroCarousel" className="carousel slide" data-bs-ride="carousel">
-            <div className="carousel-indicators">
+        <section className="hero-slider" aria-label="Featured properties slideshow">
+            {/* Slides */}
+            {slides.map((slide, index) => (
+                <div
+                    key={slide.id}
+                    className={`hero-slide ${index === current ? 'is-active' : ''}`}
+                >
+                    {/* Background Image */}
+                    <div
+                        className={`hero-slide__bg ${index === current ? 'is-zooming' : ''}`}
+                        style={{ backgroundImage: `url("${slide.image}")` }}
+                    />
+
+                    {/* Overlay */}
+                    <div className="hero-slide__overlay" />
+                </div>
+            ))}
+
+            {/* Content — always on top */}
+            <div className="hero-slider__content">
+                <div className="hero-slider__text-container">
+                    <span className="hero-slider__eyebrow">BlueCraft Properties</span>
+                    <h1 className="hero-slider__title" key={current}>
+                        {slides[current].title}
+                    </h1>
+                    <p className="hero-slider__subtitle" key={`sub-${current}`}>
+                        {slides[current].subtitle}
+                    </p>
+                    <Link to="/properties" className="hero-slider__cta">
+                        {slides[current].cta}
+                        <i className="fas fa-arrow-right ms-2"></i>
+                    </Link>
+                </div>
+            </div>
+
+            {/* Navigation Arrows */}
+            <button className="hero-slider__arrow hero-slider__arrow--prev" onClick={goPrev} aria-label="Previous slide">
+                <i className="fas fa-chevron-left"></i>
+            </button>
+            <button className="hero-slider__arrow hero-slider__arrow--next" onClick={goNext} aria-label="Next slide">
+                <i className="fas fa-chevron-right"></i>
+            </button>
+
+            {/* Dots */}
+            <div className="hero-slider__dots">
                 {slides.map((_, index) => (
                     <button
                         key={index}
-                        type="button"
-                        data-bs-target="#heroCarousel"
-                        data-bs-slide-to={index}
-                        className={index === 0 ? "active" : ""}
-                        aria-current={index === 0 ? "true" : "false"}
-                        aria-label={`Slide ${index + 1}`}
-                    ></button>
+                        className={`hero-slider__dot ${index === current ? 'is-active' : ''}`}
+                        onClick={() => goTo(index)}
+                        aria-label={`Go to slide ${index + 1}`}
+                    />
                 ))}
             </div>
 
-            <div className="carousel-inner h-100">
-                {slides.map((slide, index) => (
-                    <div
-                        key={slide.id}
-                        className={`carousel-item ${index === 0 ? 'active' : ''}`}
-                        data-bs-interval="5000"
-                        style={{ height: '70vh', minHeight: '400px' }}
-                    >
-                        <div
-                            className="d-block w-100 h-100"
-                            style={{
-                                backgroundImage: `url("${slide.image}")`,
-                                backgroundSize: 'cover',
-                                backgroundPosition: 'center',
-                                backgroundRepeat: 'no-repeat',
-                                position: 'relative'
-                            }}
-                        >
-                            {/* Gradient Overlay */}
-                            <div
-                                style={{
-                                    position: 'absolute',
-                                    top: 0,
-                                    left: 0,
-                                    right: 0,
-                                    bottom: 0,
-                                    background: 'linear-gradient(to right, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0) 100%)',
-                                    zIndex: 1
-                                }}
-                            ></div>
-
-                            {/* Content Container */}
-                            <div
-                                className="carousel-caption d-flex flex-column justify-content-center align-items-start h-100 w-100 text-start"
-                                style={{
-                                    top: 0,
-                                    bottom: 0,
-                                    zIndex: 2,
-                                    paddingLeft: '5%',
-                                    paddingRight: '5%',
-                                    pointerEvents: 'none' // Allow clicks to pass through empty areas
-                                }}
-                            >
-                                <div className="container" style={{ pointerEvents: 'auto' }}> {/* Re-enable clicks for text text selection */}
-                                    <h1 className="display-3 fw-bold mb-3" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>{slide.title}</h1>
-                                    <p className="lead fs-2 fw-light" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.5)', maxWidth: '600px' }}>{slide.subtitle}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                ))}
+            {/* Progress Bar */}
+            <div className="hero-slider__progress">
+                <div
+                    className="hero-slider__progress-bar"
+                    key={`progress-${current}`}
+                />
             </div>
-
-            <button
-                className="carousel-control-prev"
-                type="button"
-                data-bs-target="#heroCarousel"
-                data-bs-slide="prev"
-                style={{ zIndex: 10 }} // Ensure controls are on top
-            >
-                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span className="visually-hidden">Previous</span>
-            </button>
-            <button
-                className="carousel-control-next"
-                type="button"
-                data-bs-target="#heroCarousel"
-                data-bs-slide="next"
-                style={{ zIndex: 10 }} // Ensure controls are on top
-            >
-                <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                <span className="visually-hidden">Next</span>
-            </button>
-        </div>
+        </section>
     );
 };
 

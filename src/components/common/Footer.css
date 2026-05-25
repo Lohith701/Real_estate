@@ -1,1 +1,295 @@
-/* Styles handled by Bootstrap in Footer.jsx */
+/* ========================================
+   FOOTER STYLES — Mobile-first approach
+   ======================================== */
+
+/* ---------- Top CTA Section ---------- */
+.footer-cta-section {
+  background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%);
+  padding: 2.5rem 0;
+  border-bottom: 1px solid rgba(0, 86, 179, 0.08);
+}
+
+.footer-cta-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.75rem 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 86, 179, 0.06);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.footer-cta-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(0, 86, 179, 0.1);
+}
+
+.footer-cta-card h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #212529;
+  margin-bottom: 0.4rem;
+}
+
+.footer-cta-card p {
+  font-size: 0.85rem;
+  color: #6c757d;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.footer-cta-btn {
+  display: inline-block;
+  padding: 0.55rem 1.6rem;
+  background: var(--primary-color, #0056b3);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.footer-cta-btn:hover {
+  background: #003d80;
+  color: #fff;
+  transform: scale(1.04);
+}
+
+/* ---------- Navigation Links ---------- */
+.footer-nav-section {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.footer-nav-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.footer-nav-grid li {
+  border-bottom: 1px solid #f1f3f5;
+}
+
+.footer-nav-grid li:nth-last-child(-n+2) {
+  border-bottom: none;
+}
+
+.footer-nav-grid li:nth-child(odd) {
+  border-right: 1px solid #f1f3f5;
+}
+
+.footer-nav-grid a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #495057;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.footer-nav-grid a:hover {
+  color: var(--primary-color, #0056b3);
+  background-color: #f8f9ff;
+}
+
+.footer-nav-grid a .nav-icon {
+  font-size: 0.7rem;
+  color: var(--primary-color, #0056b3);
+  opacity: 0.6;
+}
+
+/* ---------- Contact Info Section ---------- */
+.footer-contact-section {
+  padding: 2rem 0 1.5rem;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.footer-brand-name {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: #212529;
+}
+
+.footer-brand-name span {
+  color: var(--primary-color, #0056b3);
+  font-weight: 700;
+}
+
+.footer-contact-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.footer-contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border: 1px solid #f1f3f5;
+}
+
+.footer-contact-item .contact-icon {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--primary-color, #0056b3), #003d80);
+  color: #fff;
+  border-radius: 10px;
+  font-size: 0.8rem;
+}
+
+.footer-contact-item .contact-text {
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: #495057;
+}
+
+.footer-contact-item .contact-text a {
+  color: var(--primary-color, #0056b3);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* ---------- Social Icons ---------- */
+.footer-social {
+  display: flex;
+  justify-content: center;
+  gap: 0.65rem;
+  margin-bottom: 1.5rem;
+}
+
+.footer-social a {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: #f0f4ff;
+  color: var(--primary-color, #0056b3);
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 86, 179, 0.08);
+}
+
+.footer-social a:hover {
+  background: var(--primary-color, #0056b3);
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 86, 179, 0.25);
+}
+
+/* ---------- Divider ---------- */
+.footer-divider {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--primary-color, #0056b3), transparent);
+  border-radius: 3px;
+  margin: 0 auto 1rem;
+  border: none;
+}
+
+/* ---------- Copyright ---------- */
+.footer-copyright {
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 0.78rem;
+  color: #adb5bd;
+  background: #f8f9fa;
+  border-top: 1px solid #e9ecef;
+}
+
+/* ==============================================
+   DESKTOP OVERRIDES (≥768px)
+   ============================================== */
+@media (min-width: 768px) {
+  .footer-cta-section {
+    padding: 3rem 0;
+  }
+
+  .footer-cta-wrapper {
+    display: flex;
+    gap: 2rem;
+    align-items: stretch;
+    position: relative;
+  }
+
+  .footer-cta-card {
+    flex: 1;
+  }
+
+  .footer-cta-divider {
+    display: block;
+    width: 1px;
+    background: rgba(0, 0, 0, 0.08);
+    align-self: stretch;
+  }
+
+  .footer-nav-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .footer-nav-grid li {
+    border-bottom: none;
+  }
+
+  .footer-nav-grid li:nth-child(odd) {
+    border-right: none;
+  }
+
+  .footer-nav-grid a {
+    justify-content: center;
+  }
+
+  .footer-contact-section {
+    padding: 2.5rem 0;
+  }
+
+  .footer-contact-inner {
+    display: flex;
+    align-items: flex-start;
+    gap: 3rem;
+    justify-content: center;
+  }
+
+  .footer-brand {
+    justify-content: flex-start;
+  }
+
+  .footer-contact-col {
+    flex: 1;
+    max-width: 380px;
+  }
+
+  .footer-social-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}

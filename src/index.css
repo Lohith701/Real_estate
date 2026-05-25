@@ -54,48 +54,7 @@ ul {
   flex: 1;
 }
 
-/* Custom Navbar Styling */
-@media (max-width: 991.98px) {
-  .navbar-collapse {
-    background-color: var(--white);
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    padding: 1rem;
-    margin-top: 0.5rem;
-    position: absolute;
-    top: 100%;
-    left: 1rem;
-    right: 1rem;
-    z-index: 1050;
-    border: 1px solid rgba(0,0,0,0.05);
-    opacity: 0;
-    transform: translateY(-10px);
-    visibility: hidden;
-    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
-    display: block !important; /* Override bootstrap display none to allow transition */
-  }
-  
-  .navbar-collapse.show {
-    opacity: 1;
-    transform: translateY(0);
-    visibility: visible;
-  }
-
-  .nav-item {
-    margin-bottom: 0.25rem;
-  }
-
-  .nav-link {
-    border-radius: 8px;
-    transition: var(--transition);
-    padding: 0.75rem 1rem !important;
-  }
-
-  .nav-link:hover, .nav-link:focus {
-    background-color: var(--primary-light);
-    color: var(--primary-color) !important;
-  }
-}
+/* Custom Navbar Styling — Mobile drawer styles are in Nav.css */
 
 @media (min-width: 992px) {
   .nav-link {
@@ -115,11 +74,11 @@ ul {
     transform: translateX(-50%);
   }
 
-  .nav-link:hover::after {
+  .nav-link:hover::after, .nav-link.active-link::after {
     width: 80%;
   }
   
-  .nav-link:hover {
+  .nav-link:hover, .nav-link.active-link {
     color: var(--primary-color) !important;
   }
 }
