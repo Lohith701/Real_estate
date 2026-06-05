@@ -6,11 +6,12 @@ const PropertyCard = ({ property }) => {
         <div className="property-card card border shadow-sm mb-3 overflow-hidden">
             <div className="row g-0">
                 {/* Left: Image Section */}
-                <div className="col-md-4 position-relative property-card-img-container">
+                <div className="col-md-4 position-relative p-0" style={{ minHeight: '250px', maxHeight: '300px' }}>
                     <img
                         src={property.image}
                         alt={property.title}
-                        className="img-fluid h-100 w-100 object-fit-cover"
+                        className="w-100 h-100"
+                        style={{ objectFit: 'cover', objectPosition: 'top' }}
                     />
                     <div className="position-absolute top-0 start-0 m-2">
                         {/* Optional badge if needed */}
@@ -25,7 +26,7 @@ const PropertyCard = ({ property }) => {
                         <div className="d-flex justify-content-between align-items-start mb-2">
                             <div>
                                 <h5 className="card-title fw-bold mb-1 text-dark">
-                                    {property.title} <i className="fas fa-external-link-alt small text-muted ms-1" style={{ fontSize: '0.8rem' }}></i>
+                                    {property.title}
                                 </h5>
                                 <p className="card-text text-muted small mb-0">
                                     {property.location}
@@ -48,8 +49,10 @@ const PropertyCard = ({ property }) => {
                                     <div className="fw-bold small">{property.bhk}</div>
                                 </div>
                                 <div className="col-4 border-end">
-                                    <div className="text-secondary small text-uppercase fw-bold" style={{ fontSize: '0.7rem' }}>Carpet Area</div>
-                                    <div className="fw-bold small">{property.area}</div>
+                                    <div className="text-secondary small text-uppercase fw-bold" style={{ fontSize: '0.7rem' }}>
+                                        {property.projectArea ? 'Project Area' : 'Carpet Area'}
+                                    </div>
+                                    <div className="fw-bold small">{property.projectArea || property.area}</div>
                                 </div>
                                 <div className="col-4">
                                     <div className="text-secondary small text-uppercase fw-bold" style={{ fontSize: '0.7rem' }}>Status</div>
@@ -59,20 +62,34 @@ const PropertyCard = ({ property }) => {
                         </div>
 
                         {/* Footer: Price & Actions */}
-                        <div className="mt-auto d-flex align-items-center justify-content-between">
-                            <div>
-                                <h4 className="fw-bold text-dark mb-0">{property.price}</h4>
-                            </div>
-                            <div className="d-flex gap-2">
-                                <button className="btn btn-outline-danger btn-sm px-3 shadow-sm">
-                                    <i className="far fa-heart"></i>
-                                </button>
-                                <button className="btn btn-outline-secondary btn-sm px-3 shadow-sm">
-                                    <i className="fas fa-share-alt"></i>
-                                </button>
-                                <Link to={`/properties/${property._id || property.id}`} className="btn btn-success fw-bold px-4 shadow-sm" style={{ backgroundColor: '#009587', borderColor: '#009587', textDecoration: 'none' }}>
-                                    Check Property
-                                </Link>
+                        <div className="mt-auto pt-3">
+                            <div className="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
+                                <div>
+                                    <h4 className="fw-bold text-dark mb-0">{property.price}</h4>
+                                </div>
+                                <div className="d-flex gap-2 w-100 justify-content-md-end" style={{ flex: '1' }}>
+                                    <button className="btn btn-outline-primary px-3 shadow-sm flex-shrink-0" aria-label="View on Map">
+                                        <i className="fas fa-map-marked-alt"></i>
+                                    </button>
+                                    <button 
+                                        className="btn btn-outline-secondary px-3 shadow-sm flex-shrink-0"
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            const link = `${window.location.origin}/properties/${property._id || property.id}`;
+                                            if (navigator.share) {
+                                                navigator.share({ title: property.title, url: link }).catch(console.error);
+                                            } else {
+                                                navigator.clipboard.writeText(link);
+                                                alert('Property link copied to clipboard!');
+                                            }
+                                        }}
+                                    >
+                                        <i className="fas fa-share-alt"></i>
+                                    </button>
+                                    <Link to={`/properties/${property._id || property.id}`} className="btn btn-success fw-bold px-4 shadow-sm flex-grow-1 flex-md-grow-0" style={{ backgroundColor: '#009587', borderColor: '#009587', textDecoration: 'none' }}>
+                                        Check Property
+                                    </Link>
+                                </div>
                             </div>
                         </div>
 

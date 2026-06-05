@@ -122,20 +122,17 @@ const Footer = () => {
                         <div className="footer-social-col">
                             <hr className="footer-divider" />
                             <div className="footer-social">
-                                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                                <a href="https://www.facebook.com/bluecraftdesignstudio/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                                     <i className="fab fa-facebook-f"></i>
                                 </a>
-                                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                                    <i className="fab fa-twitter"></i>
+                                <a href="https://x.com/BlueCraft9999" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+                                    <i className="fab fa-x-twitter"></i>
                                 </a>
-                                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                                <a href="https://www.instagram.com/blue_craft_design_studio/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                                     <i className="fab fa-instagram"></i>
                                 </a>
-                                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                                <a href="https://www.linkedin.com/company/blue-craft-design-studio/posts/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                                     <i className="fab fa-linkedin-in"></i>
-                                </a>
-                                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-                                    <i className="fab fa-youtube"></i>
                                 </a>
                             </div>
                         </div>

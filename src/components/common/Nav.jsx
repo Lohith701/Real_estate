@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import logo from '../../assets/logo.jpg';
+import logo from '../../assets/FINAL_LOGO.webp';
 import './Nav.css';
 
 const navLinks = [
@@ -12,10 +12,24 @@ const navLinks = [
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [hasScrolled, setHasScrolled] = useState(false);
     const location = useLocation();
+    const isHomePage = location.pathname === '/';
+    const isTransparent = isHomePage && !hasScrolled && !isOpen;
 
     const toggle = () => setIsOpen(!isOpen);
     const closeMenu = () => setIsOpen(false);
+
+    useEffect(() => {
+        const updateScrollState = () => {
+            setHasScrolled(window.scrollY > 24);
+        };
+
+        updateScrollState();
+        window.addEventListener('scroll', updateScrollState, { passive: true });
+
+        return () => window.removeEventListener('scroll', updateScrollState);
+    }, [location.pathname]);
 
     // Prevent body scroll when menu is open
     useEffect(() => {
@@ -29,7 +43,7 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className="mobile-navbar sticky-top" style={{ zIndex: 1050 }}>
+            <nav className={`mobile-navbar ${isHomePage ? 'home-navbar' : 'sticky-top'} ${isTransparent ? 'is-transparent' : 'is-solid'}`} style={{ zIndex: 1050 }}>
                 <div className="mobile-navbar-inner">
                     <Link to="/" className="mobile-navbar-brand" onClick={closeMenu}>
                         <img src={logo} alt="Blue Craft Properties" className="mobile-navbar-logo" />
@@ -124,7 +138,7 @@ const Navbar = () => {
             </aside>
 
             {/* Desktop Navbar — only visible on lg+ */}
-            <nav className="desktop-navbar navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm py-2" style={{ zIndex: 1049 }}>
+            <nav className={`desktop-navbar navbar navbar-expand-lg navbar-light py-2 ${isHomePage ? 'home-navbar' : 'sticky-top'} ${isTransparent ? 'is-transparent' : 'is-solid'}`} style={{ zIndex: 1049 }}>
                 <div className="container-fluid px-4">
                     <Link to="/" className="navbar-brand d-flex align-items-center">
                         <img src={logo} alt="Blue Craft Properties" className="me-2" style={{ height: 'clamp(35px, 6vw, 50px)', width: 'auto' }} />

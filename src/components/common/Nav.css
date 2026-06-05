@@ -8,6 +8,45 @@
   background: #fff;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
   padding: 0;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+.mobile-navbar.home-navbar,
+.desktop-navbar.home-navbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
+.mobile-navbar.is-transparent,
+.desktop-navbar.is-transparent {
+  background: transparent;
+  box-shadow: none;
+}
+
+.mobile-navbar.is-solid,
+.desktop-navbar.is-solid {
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.mobile-navbar.is-transparent .brand-primary,
+.mobile-navbar.is-transparent .brand-accent,
+.desktop-navbar.is-transparent .navbar-brand span,
+.desktop-navbar.is-transparent .nav-link {
+  color: #fff !important;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
+}
+
+.mobile-navbar.is-transparent .toggle-bar {
+  background: #fff;
+}
+
+.mobile-navbar.is-transparent .mobile-menu-toggle:hover {
+  background: rgba(255, 255, 255, 0.16);
 }
 
 .mobile-navbar-inner {
@@ -401,5 +440,6 @@
 
   .desktop-navbar {
     display: flex !important;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
   }
 }

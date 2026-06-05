@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import './SearchBar.css';
 
 const SearchBar = () => {
-    const [activeTab, setActiveTab] = useState('Flat');
+    const [activeTab, setActiveTab] = useState('Apartment');
     const [searchQuery, setSearchQuery] = useState('');
     const [lastSearch, setLastSearch] = useState(null);
     const navigate = useNavigate();
 
-    const tabs = ['Flat', 'Villa', 'Commercial'];
+    const tabs = ['Apartment', 'Villa', 'Commercial'];
 
     React.useEffect(() => {
         const storedSearch = localStorage.getItem('lastPropertySearch');

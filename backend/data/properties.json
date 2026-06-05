@@ -1,0 +1,194 @@
+[
+  {
+    "_id": "60c72b2f9b1d8b2a3c8e4516",
+    "id": 6,
+    "title": "IHAM Residences",
+    "location": "Chambenahalli, Sarjapur, Bangalore",
+    "price": "₹60.75 L - ₹88.42 L",
+    "priceVal": 6075000,
+    "type": "Apartment",
+    "bhk": "2, 3 BHK",
+    "area": "1350 - 1965 sq.ft",
+    "projectArea": "16 Acres",
+    "status": "Under Construction",
+    "builder": "IHAM",
+    "builderLogo": "https://via.placeholder.com/30?text=Q",
+    "image": "/src/resources/Properties/IHAM/WhatsApp Image 2026-06-05 at 07.13.30.jpeg",
+    "description": "A premium 16-acre high-rise residential development by IHAM, offering investors an opportunity to secure units at approximately 50% below the expected retail launch price before the official market launch in 2026.",
+    "overview": "A premium 16-acre high-rise residential development by IHAM, offering investors an opportunity to secure units at approximately 50% below the expected retail launch price before the official market launch in 2026.",
+    "configurations": [
+      {
+        "type": "2 BHK",
+        "size": "1,350 sq.ft",
+        "details": ""
+      },
+      {
+        "type": "3 BHK",
+        "size": "1,740 – 1,965 sq.ft",
+        "details": "East Facing & West Facing Options"
+      }
+    ],
+    "projectTimeline": {
+      "launchDate": "September 2026",
+      "estimatedCompletion": "48 Months",
+      "gracePeriod": "Additional 6 Months"
+    },
+    "investmentPricing": {
+      "preLaunch": "₹4,500 per sq.ft",
+      "retailLaunch": "₹9,000 per sq.ft",
+      "advantage": "Potential 2X appreciation from pre-launch to retail launch pricing.",
+      "includes": [
+        "Salable Apartment Area",
+        "Undivided Land Share (UDS)",
+        "Car Parking"
+      ],
+      "excludes": [
+        "GST",
+        "Registration Charges",
+        "Stamp Duty",
+        "Piped Gas Meter Charges",
+        "BESCOM Charges",
+        "BWSSB Charges",
+        "Amenities Charges",
+        "Clubhouse Charges",
+        "Maintenance Charges",
+        "Corpus Fund",
+        "Legal Charges",
+        "Khata Charges"
+      ]
+    },
+    "investmentProcess": [
+      {
+        "step": "Step 1 – Expression of Interest (EOI)",
+        "description": "Submit an Expression of Interest to reserve participation."
+      },
+      {
+        "step": "Step 2 – MOU & Payment",
+        "description": "Execute the MOU. Complete full payment within 30 days. Unit selection occurs during MOU execution."
+      },
+      {
+        "step": "Step 3 – Ownership",
+        "description": "Execute the Agreement of Sale if retaining the investment. Must be completed within 60 days of RERA approval."
+      }
+    ],
+    "retainVsResell": {
+      "retaining": [
+        "Long-Term Capital Gains (LTCG) tax applicable at 12.5% after 24 months.",
+        "Suitable for long-term wealth creation."
+      ],
+      "reselling": [
+        "24-month lock-in period after RERA approval.",
+        "Resale facilitated through the project's marketing team.",
+        "Marketing fee: 5% of sale value."
+      ]
+    },
+    "locationHighlights": [
+      "One of Bangalore's fastest-growing real estate corridors.",
+      "Nearby premium developments already trading above ₹8,000/sq.ft.",
+      "Strong appreciation potential due to Peripheral Ring Road (PRR) development.",
+      "Excellent connectivity to major IT parks and employment hubs.",
+      "High rental demand and strong resale market."
+    ],
+    "exitAssurance": {
+      "principalProtection": "100% principal refund guarantee.",
+      "assuredReturns": "18% simple interest per annum upon exit.",
+      "exitWindow": "Available between 12–36 months from investment.",
+      "liquidity": "Refund available with 2 months' prior notice.",
+      "upsideProtection": "Investors retain the right to convert their investment into an apartment at ₹4,500/sq.ft even if market prices reach ₹9,000/sq.ft or higher."
+    },
+    "amenities": [
+      "Salable Area & Land Share",
+      "Car Parking",
+      "Exit Assurance Guarantee",
+      "Principal Security (100% Refund)",
+      "18% simple interest p.a. Return",
+      "24/7 Security"
+    ],
+    "images": [
+      "/src/resources/Properties/IHAM/WhatsApp Image 2026-06-05 at 07.13.30.jpeg",
+      "/src/resources/Properties/IHAM/WhatsApp Image 2026-06-05 at 07.13.31.jpeg",
+      "/src/resources/Properties/IHAM/WhatsApp Image 2026-06-05 at 07.13.32 (1).jpeg",
+      "/src/resources/Properties/IHAM/WhatsApp Image 2026-06-05 at 07.13.32.jpeg",
+      "/src/resources/Properties/IHAM/WhatsApp Image 2026-06-05 at 07.13.33 (1).jpeg",
+      "/src/resources/Properties/IHAM/WhatsApp Image 2026-06-05 at 07.13.33.jpeg",
+      "/src/resources/Properties/IHAM/WhatsApp Image 2026-06-05 at 07.13.34.jpeg",
+      "/src/resources/Properties/IHAM/WhatsApp Image 2026-06-05 at 07.13.35.jpeg"
+    ],
+    "createdAt": "2026-06-05T07:00:00.000Z",
+    "brochure": "/src/resources/Properties/IHAM/TR HO QDB_IHAM_I1125_PAGES.pdf"
+  },
+  {
+    "_id": "60c72b2f9b1d8b2a3c8e4517",
+    "id": 7,
+    "title": "The Cape",
+    "location": "Chandapura-Anekal Main Road, Bangalore",
+    "price": "Contact for Price",
+    "priceVal": 0,
+    "type": "Plots",
+    "bhk": "N/A",
+    "area": "30x40, 30x50, 30x55",
+    "projectArea": "18.5 Acres",
+    "status": "Ready",
+    "builder": "Baky Proptech",
+    "builderLogo": "https://via.placeholder.com/30?text=BP",
+    "image": "/src/resources/Properties/The Cape by Baky - Anekal Project/1780664362260-ada6aa4b-d654-4a16-9d3d-0fd68d16723d_1.jpg",
+    "description": "A rare gem in a prime locality. The Cape combines the tranquility of nature with the convenience of modern urban living. Spread across 18.5 acres with 49% open space, 14 parks, and a 12,000 sq.ft clubhouse.",
+    "overview": "With over 25 years of experience in the real estate industry, Baky Proptech brings a legacy of excellence to its very first independent venture. The Cape offers premium plots tailored for those who value individuality, spacious living, and long-term appreciation.",
+    "configurations": [
+      {
+        "type": "Plot",
+        "size": "30x40",
+        "details": "Premium Plot"
+      },
+      {
+        "type": "Plot",
+        "size": "30x50",
+        "details": "Premium Plot"
+      },
+      {
+        "type": "Plot",
+        "size": "30x55",
+        "details": "Premium Plot"
+      },
+      {
+        "type": "Plot",
+        "size": "Odd Sites",
+        "details": "Custom Dimensions"
+      }
+    ],
+    "amenities": [
+      "14 Parks",
+      "12,000 sq.ft Clubhouse",
+      "Swimming Pool",
+      "Multipurpose Hall",
+      "Childrens Play Area",
+      "Amphitheatre",
+      "Multipurpose Court",
+      "Underground Sewage System",
+      "CC Roads",
+      "BMRDA Approved"
+    ],
+    "locationHighlights": [
+      "Strategically located on an 80 ft. double road.",
+      "5 minutes from Alliance University.",
+      "10 minutes from Jigani Industrial Area.",
+      "Lake views just 50 meters from the project.",
+      "Excellent connectivity for work and leisure."
+    ],
+    "createdAt": "2026-06-05T12:52:52.028Z",
+    "images": [
+      "/src/resources/Properties/The Cape by Baky - Anekal Project/1780664362260-ada6aa4b-d654-4a16-9d3d-0fd68d16723d_1.jpg",
+      "/src/resources/Properties/The Cape by Baky - Anekal Project/1780664362260-ada6aa4b-d654-4a16-9d3d-0fd68d16723d_2.jpg",
+      "/src/resources/Properties/The Cape by Baky - Anekal Project/1780664362260-ada6aa4b-d654-4a16-9d3d-0fd68d16723d_3.jpg",
+      "/src/resources/Properties/The Cape by Baky - Anekal Project/1780664362260-ada6aa4b-d654-4a16-9d3d-0fd68d16723d_4.jpg",
+      "/src/resources/Properties/The Cape by Baky - Anekal Project/1780664362260-ada6aa4b-d654-4a16-9d3d-0fd68d16723d_5.jpg",
+      "/src/resources/Properties/The Cape by Baky - Anekal Project/1780664362260-ada6aa4b-d654-4a16-9d3d-0fd68d16723d_6.jpg",
+      "/src/resources/Properties/The Cape by Baky - Anekal Project/1780664362260-ada6aa4b-d654-4a16-9d3d-0fd68d16723d_7.jpg",
+      "/src/resources/Properties/The Cape by Baky - Anekal Project/1780664362260-ada6aa4b-d654-4a16-9d3d-0fd68d16723d_8.jpg",
+      "/src/resources/Properties/The Cape by Baky - Anekal Project/1780664362260-ada6aa4b-d654-4a16-9d3d-0fd68d16723d_9.jpg",
+      "/src/resources/Properties/The Cape by Baky - Anekal Project/1780664362260-ada6aa4b-d654-4a16-9d3d-0fd68d16723d_10.jpg",
+      "/src/resources/Properties/The Cape by Baky - Anekal Project/1780664362260-ada6aa4b-d654-4a16-9d3d-0fd68d16723d_11.jpg"
+    ],
+    "brochure": "/src/resources/Properties/The Cape by Baky - Anekal Project/The Cape by Baky - Anekal Project.pdf"
+  }
+]

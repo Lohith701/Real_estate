@@ -28,7 +28,7 @@ const PropertiesPage = () => {
     useEffect(() => {
         const fetchProperties = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/properties');
+                const response = await fetch('/api/properties');
                 const result = await response.json();
                 if (result.success) {
                     setFetchedProperties(result.data);
@@ -49,8 +49,8 @@ const PropertiesPage = () => {
         setPrevSearchParams(searchParams);
         const typeParam = searchParams.get('type');
         const queryParam = searchParams.get('query');
-        if (typeParam) setFilterType(typeParam);
-        if (queryParam) setSearchQuery(queryParam);
+        setFilterType(typeParam || 'All');
+        setSearchQuery(queryParam || '');
     }
 
     // Apply Filters (Derived State)
@@ -96,7 +96,7 @@ const PropertiesPage = () => {
         }
 
         return filtered;
-    }, [filterType, filterLocation, searchQuery, filterBHK, priceRange, filterStatus]);
+    }, [fetchedProperties, filterType, filterLocation, searchQuery, filterBHK, priceRange, filterStatus]);
 
     // Handlers
     const resetFilters = () => {
@@ -279,7 +279,7 @@ const PropertiesPage = () => {
                     {/* Properties List */}
                     <div className="col-lg-9">
                         <div className="d-flex justify-content-between align-items-center mb-3">
-                            <h5 className="text-secondary fw-normal">Showing <span className="fw-bold text-dark">{items.length}</span> Properties in <span className="fw-bold text-dark">{filterLocation === 'All' ? 'Bangalore' : filterLocation}</span></h5>
+                            <h5 className="text-secondary fw-normal">Showing <span className="fw-bold text-dark">{items.length}</span> Properties in <span className="fw-bold text-dark">{filterLocation === 'All' ? 'All Cities' : filterLocation}</span></h5>
                             <div className="d-flex gap-2">
                                 <button className="btn btn-outline-secondary btn-sm"><i className="fas fa-list"></i> List</button>
                                 <button className="btn btn-outline-secondary btn-sm"><i className="fas fa-map-marker-alt"></i> Map</button>
