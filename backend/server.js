@@ -37,15 +37,29 @@ connectDB().then(() => {
 
 // Middleware
 app.use(cors({
-  origin: [
-    'https://bluecraftproperties.vercel.app',
-    'http://localhost:5173',
-    'http://localhost:5174',
-    'http://localhost:3000'
-  ],
+  origin: function(origin, callback) {
+    const allowed = [
+      'https://bluecraftproperties.netlify.app',
+      'https://bluecraftproperties.vercel.app',
+      'http://localhost:5173',
+      'http://localhost:5174',
+      'http://localhost:3000'
+    ];
+    // Allow requests with no origin (mobile apps, curl, Render health checks)
+    if (!origin) return callback(null, true);
+    // Allow any netlify.app subdomain (for deploy previews)
+    if (origin.endsWith('.netlify.app') || allowed.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error('Not allowed by CORS'));
+  },
   optionsSuccessStatus: 200
 }));
 app.use(express.json());
+
+// Health check — Render pings this to keep the server warm
+app.get('/', (req, res) => res.json({ status: 'ok', service: 'BlueCraft Properties API' }));
+app.get('/health', (req, res) => res.json({ status: 'ok' }));
 
 // Mount Routes
 app.use('/api/properties', propertyRoutes);
