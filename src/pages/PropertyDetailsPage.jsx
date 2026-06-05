@@ -115,13 +115,23 @@ const PropertyDetailsPage = () => {
                             <div>
                                 <h2 className="display-6 display-md-4 fw-bold text-primary mb-0" style={{ color: '#0056b3' }}>{property.price}</h2>
                             </div>
-                            {property.brochure && (
-                                <div className="w-100" style={{ maxWidth: '400px' }}>
-                                    <a href={property.brochure} target="_blank" rel="noopener noreferrer" className="btn btn-outline-primary px-4 py-2 shadow-sm fw-bold rounded-pill w-100" download>
+                            <div className="d-flex flex-column flex-sm-row gap-2 w-100" style={{ maxWidth: '500px' }}>
+                                {property.mapLink && (
+                                    <a
+                                        href={property.mapLink}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="btn btn-outline-success px-4 py-2 shadow-sm fw-bold rounded-pill flex-grow-1"
+                                    >
+                                        <i className="fas fa-map-marked-alt me-2"></i> View on Map
+                                    </a>
+                                )}
+                                {property.brochure && (
+                                    <a href={property.brochure} target="_blank" rel="noopener noreferrer" className="btn btn-outline-primary px-4 py-2 shadow-sm fw-bold rounded-pill flex-grow-1" download>
                                         <i className="fas fa-file-pdf me-2"></i> Download Brochure
                                     </a>
-                                </div>
-                            )}
+                                )}
+                            </div>
                         </div>
 
                         <hr className="text-secondary opacity-25" />

@@ -115,7 +115,8 @@
       "/src/resources/Properties/IHAM/WhatsApp Image 2026-06-05 at 07.13.35.jpeg"
     ],
     "createdAt": "2026-06-05T07:00:00.000Z",
-    "brochure": "/src/resources/Properties/IHAM/TR HO QDB_IHAM_I1125_PAGES.pdf"
+    "brochure": "/src/resources/Properties/IHAM/TR HO QDB_IHAM_I1125_PAGES.pdf",
+    "mapLink": "https://maps.app.goo.gl/TS7sJwrX7AF46K7H7?g_st=aw"
   },
   {
     "_id": "60c72b2f9b1d8b2a3c8e4517",
@@ -189,6 +190,7 @@
       "/src/resources/Properties/The Cape by Baky - Anekal Project/1780664362260-ada6aa4b-d654-4a16-9d3d-0fd68d16723d_10.jpg",
       "/src/resources/Properties/The Cape by Baky - Anekal Project/1780664362260-ada6aa4b-d654-4a16-9d3d-0fd68d16723d_11.jpg"
     ],
-    "brochure": "/src/resources/Properties/The Cape by Baky - Anekal Project/The Cape by Baky - Anekal Project.pdf"
+    "brochure": "/src/resources/Properties/The Cape by Baky - Anekal Project/The Cape by Baky - Anekal Project.pdf",
+    "mapLink": "https://maps.app.goo.gl/JMBKiMkQyvo5SyVJ8?g_st=iw"
   }
 ]

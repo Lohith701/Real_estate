@@ -70,7 +70,18 @@ const PropertyCard = ({ property }) => {
                                     <h4 className="fw-bold text-dark mb-0">{property.price}</h4>
                                 </div>
                                 <div className="d-flex gap-2 w-100 justify-content-md-end" style={{ flex: '1' }}>
-                                    <button className="btn btn-outline-primary px-3 shadow-sm flex-shrink-0" aria-label="View on Map">
+                                    <button
+                                        className="btn btn-outline-primary px-3 shadow-sm flex-shrink-0"
+                                        aria-label="View on Map"
+                                        title={property.mapLink ? 'View on Google Maps' : 'Map not available'}
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            if (property.mapLink) {
+                                                window.open(property.mapLink, '_blank', 'noopener,noreferrer');
+                                            }
+                                        }}
+                                        style={{ opacity: property.mapLink ? 1 : 0.5 }}
+                                    >
                                         <i className="fas fa-map-marked-alt"></i>
                                     </button>
                                     <button 
