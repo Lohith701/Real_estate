@@ -2,10 +2,16 @@ import React from 'react';
 import houseImage from '../assets/blue-craft-house.jpg';
 import HeroBanner from '../components/common/HeroBanner';
 import aboutBannerImg from '../resources/hero_banner/interior-modern-open-plan-kitchen-with-dining-table-glowi.jpg.jpeg';
+import PageMeta from '../components/common/PageMeta';
 
 const AboutPage = () => {
     return (
         <div className="bg-light pb-5">
+            <PageMeta
+                title="About Us"
+                description="Learn about BlueCraft Properties — trusted real estate partners in Bengaluru providing seamless property selling experiences for plots, flats, and villas."
+                keywords="about BlueCraft Properties, real estate Bengaluru, trusted property agents, HSR Layout"
+            />
             {/* 1. HERO BANNER */}
             <HeroBanner
                 backgroundImage={aboutBannerImg}

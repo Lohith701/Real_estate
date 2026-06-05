@@ -1,13 +1,8 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import PropertyCard from '../components/properties/PropertyCard';
-
-// Import images (reusing slider images for demo)
-import rentImg from '../resources/home-slider/rent.png';
-import buyImg from '../resources/home-slider/buy.png';
-import sellImg from '../resources/home-slider/sell.png';
-
-// Removed PROPERTIES_DATA
+import { PropertyCardSkeleton } from '../components/common/SkeletonLoader';
+import PageMeta from '../components/common/PageMeta';
 
 const PropertiesPage = () => {
     const [searchParams] = useSearchParams();
@@ -123,6 +118,11 @@ const PropertiesPage = () => {
 
     return (
         <div className="properties-page-container">
+            <PageMeta
+                title="Properties"
+                description="Browse premium real estate properties in Bengaluru including IHAM Residences and The Cape by Baky. Zero brokerage, curated listings."
+                keywords="properties Bangalore, plots Anekal, flats Bengaluru, IHAM, The Cape Baky, buy property"
+            />
             {/* Header Search Section */}
             <div className="properties-search-header py-3 shadow-sm sticky-top bg-white border-bottom" style={{ zIndex: 1020, top: '72px' }}>
                 <div className="container">
@@ -279,7 +279,11 @@ const PropertiesPage = () => {
                     {/* Properties List */}
                     <div className="col-lg-9">
                         <div className="d-flex justify-content-between align-items-center mb-3">
-                            <h5 className="text-secondary fw-normal">Showing <span className="fw-bold text-dark">{items.length}</span> Properties in <span className="fw-bold text-dark">{filterLocation === 'All' ? 'All Cities' : filterLocation}</span></h5>
+                            <h5 className="text-secondary fw-normal">
+                                {loading
+                                    ? 'Loading properties…'
+                                    : <><span className="fw-bold text-dark">{items.length}</span> {items.length === 1 ? 'Property' : 'Properties'} in <span className="fw-bold text-dark">{filterLocation === 'All' ? 'All Cities' : filterLocation}</span></>}
+                            </h5>
                             <div className="d-flex gap-2">
                                 <button className="btn btn-outline-secondary btn-sm"><i className="fas fa-list"></i> List</button>
                                 <button className="btn btn-outline-secondary btn-sm"><i className="fas fa-map-marker-alt"></i> Map</button>
@@ -287,7 +291,9 @@ const PropertiesPage = () => {
                         </div>
 
                         <div className="properties-list d-flex flex-column gap-4">
-                            {items.length > 0 ? (
+                            {loading ? (
+                                [1, 2, 3].map(i => <PropertyCardSkeleton key={i} />)
+                            ) : items.length > 0 ? (
                                 items.map((property) => (
                                     <PropertyCard key={property._id || property.id} property={property} />
                                 ))

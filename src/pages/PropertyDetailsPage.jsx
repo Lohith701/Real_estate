@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import LeadForm from '../components/home/LeadForm';
-
-// Reusing images for demo
-import rentImg from '../resources/home-slider/rent.png';
-import buyImg from '../resources/home-slider/buy.png';
-import sellImg from '../resources/home-slider/sell.png';
-
-// Removed PROPERTIES_DATA
+import { PageLoader } from '../components/common/SkeletonLoader';
 
 const PropertyDetailsPage = () => {
     const { id } = useParams();
@@ -45,11 +39,7 @@ const PropertyDetailsPage = () => {
     }, [id]);
 
     if (loading) {
-        return (
-            <div className="container py-5 text-center">
-                <h2>Loading Property...</h2>
-            </div>
-        );
+        return <PageLoader message="Loading property details…" />;
     }
 
     if (!property) {

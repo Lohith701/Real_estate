@@ -11,6 +11,8 @@ const PropertyCard = ({ property }) => {
                         src={property.image}
                         alt={property.title}
                         className="w-100 h-100"
+                        loading="lazy"
+                        decoding="async"
                         style={{ objectFit: 'cover', objectPosition: 'top' }}
                     />
                     <div className="position-absolute top-0 start-0 m-2">
