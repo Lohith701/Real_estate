@@ -27,6 +27,7 @@ const PropertiesPage = () => {
                 const result = await response.json();
                 if (result.success) {
                     setFetchedProperties(result.data);
+                    console.log("Properties received:", result.data);
                 }
             } catch (error) {
                 console.error("Error fetching properties:", error);
@@ -51,6 +52,7 @@ const PropertiesPage = () => {
     // Apply Filters (Derived State)
     const items = useMemo(() => {
         let filtered = fetchedProperties;
+        console.log("Before filtering:", filtered.length);
 
         // 1. Type Filter
         if (filterType !== 'All') {
@@ -89,7 +91,7 @@ const PropertiesPage = () => {
         if (filterStatus !== 'All') {
             filtered = filtered.filter(item => item.status === filterStatus);
         }
-
+        console.log("After filtering:", filtered.length);
         return filtered;
     }, [fetchedProperties, filterType, filterLocation, searchQuery, filterBHK, priceRange, filterStatus]);
 
