@@ -22,9 +22,39 @@ const seedIfEmpty = async () => {
         await Property.insertMany(local);
         console.log(`Successfully seeded database with ${local.length} properties.`);
       }
+    } else {
+      // Run migration to fix image paths
+      const properties = await Property.find();
+      let updatedCount = 0;
+      for (const prop of properties) {
+        let changed = false;
+        if (prop.image && prop.image.startsWith('/src/resources/')) {
+          prop.image = prop.image.replace('/src/resources/', '/resources/');
+          changed = true;
+        }
+        if (prop.images && prop.images.length > 0) {
+          for (let i = 0; i < prop.images.length; i++) {
+            if (prop.images[i].startsWith('/src/resources/')) {
+              prop.images[i] = prop.images[i].replace('/src/resources/', '/resources/');
+              changed = true;
+            }
+          }
+        }
+        if (prop.brochure && prop.brochure.startsWith('/src/resources/')) {
+          prop.brochure = prop.brochure.replace('/src/resources/', '/resources/');
+          changed = true;
+        }
+        if (changed) {
+          await prop.save();
+          updatedCount++;
+        }
+      }
+      if (updatedCount > 0) {
+        console.log(`Migrated image paths for ${updatedCount} properties in the database.`);
+      }
     }
   } catch (err) {
-    console.error("Failed to seed database:", err);
+    console.error("Failed to seed or migrate database:", err);
   }
 };
 
