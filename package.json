@@ -7,7 +7,9 @@
     "dev": "concurrently \"vite\" \"npm run start --prefix backend\"",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "npm start --prefix backend",
+    "postinstall": "npm install --prefix backend"
   },
   "dependencies": {
     "bootstrap": "^5.3.8",
